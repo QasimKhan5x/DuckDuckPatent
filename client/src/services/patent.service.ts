@@ -1,7 +1,7 @@
-import HttpService from '@/services/http.service';
-import { Patent } from '@/models/Patent';
 import { Filter } from '@/models/Filter';
+import { Patent } from '@/models/Patent';
 import FilterHelperService from '@/services/filter-helper.service';
+import HttpService from '@/services/http.service';
 
 /**
  * Service which provides functions to access patent resources. It extends the HTTPService
@@ -31,16 +31,20 @@ export default class PatentService extends HttpService {
         let queryString: string | string[] = [];
 
         if (searchTerms.length > 0) {
-            queryString = searchTerms.map((term) => `keywords=${term}`);
+            queryString = searchTerms.map((term) => `q=${term}`);
         }
 
-        queryString = queryString.concat(filterParams).concat(`page=${page}`).join('&');
+        // queryString = queryString.concat(filterParams).concat(`page=${page}`).join('&');
 
         // make request
-        const response = await this.makeRequest(`${this.baseUrl}?${queryString}`, contentType, abortPrevious);
+        const response = await this.makeRequest(
+            `http://127.0.0.1:8000/search/?${queryString}`,
+            contentType,
+            abortPrevious,
+        );
 
         // accessing x-total-count header which indicates how many results are available
-        const totalCount = parseInt(response.headers.get('x-total-count') || '99');
+        const totalCount = parseInt(response.headers.get('x-total-count') || '10');
         const json = (await response.json()) as Patent[];
 
         // reset requestPending variable

@@ -8,6 +8,7 @@ export default class KeywordService {
      * @param keywords  The keywords which should be used as a base for the suggestions
      */
     public async getSuggestions(keywords: string[]): Promise<string[]> {
+        return [''];
         const response = await fetch(`/api/keyword?${keywords}`, { method: 'GET' });
         const suggestion = (await response.json()) as string[];
 
