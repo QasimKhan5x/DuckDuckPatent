@@ -9,11 +9,11 @@ export default class KeywordService {
      */
     public async getSuggestions(keywords: string[]): Promise<string[]> {
         return [''];
-        const response = await fetch(`/api/keyword?${keywords}`, { method: 'GET' });
-        const suggestion = (await response.json()) as string[];
+        // const response = await fetch(`/api/keyword?${keywords}`, { method: 'GET' });
+        // const suggestion = (await response.json()) as string[];
 
-        return suggestion.filter((value) => {
-            return keywords.indexOf(value) === -1;
-        });
+        // return suggestion.filter((value) => {
+            // return keywords.indexOf(value) === -1;
+        // });
     }
 }
