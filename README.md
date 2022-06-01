@@ -3,6 +3,7 @@
 ## Requirements
 
 * NodeJS v14
+* Python 2.7
 
 ## Preparing client & server
 
